@@ -3,13 +3,14 @@ package models
 import enums.ESTADOS
 
 // El estado base de las butacas es libre.
-data class Butaca(val estado: ESTADOS = ESTADOS.LIBRE){
+data class Butaca(var estado: ESTADOS = ESTADOS.LIBRE){
 
     override fun toString(): String {
-        when(Butaca().estado){
-            ESTADOS.LIBRE -> return "L"
-            ESTADOS.OCUPADO -> return "O"
-            ESTADOS.RESERVADO -> return "R"
+        return when(Butaca(estado)){
+            Butaca(estado = ESTADOS.LIBRE) -> "L"
+            Butaca(estado = ESTADOS.RESERVADO) -> "R"
+            Butaca(estado = ESTADOS.OCUPADO) -> "O"
+            else -> ({ println("Fatal Error!!!!")}).toString()
         }
     }
 }

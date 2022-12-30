@@ -7,9 +7,9 @@ data class Butaca(var estado: ESTADOS = ESTADOS.LIBRE){
 
     override fun toString(): String {
         return when(Butaca(estado)){
-            Butaca(estado = ESTADOS.LIBRE) -> "L"
-            Butaca(estado = ESTADOS.RESERVADO) -> "R"
-            Butaca(estado = ESTADOS.OCUPADO) -> "O"
+            Butaca(estado = ESTADOS.LIBRE) -> "💺"
+            Butaca(estado = ESTADOS.RESERVADO) -> "❌"
+            Butaca(estado = ESTADOS.OCUPADO) -> "🍿"
             else -> ({ println("Fatal Error!!!!")}).toString()
         }
     }

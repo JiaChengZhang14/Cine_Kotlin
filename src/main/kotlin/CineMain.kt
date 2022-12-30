@@ -69,12 +69,12 @@ fun selectOption(): Int {
     do {
         print("Opción seleccionada: ")
         val option = readln()
-        if (option.toInt() > 5 || option.toInt() < 1) {
+        if (option.toInt() > 6 || option.toInt() < 1) {
             println("Opción no valida")
         } else {
             return option.toInt()
         }
-    } while (option.toInt() > 5 || option.toInt() < 1)
+    } while (option.toInt() > 6 || option.toInt() < 1)
     return 0
 }
 
@@ -396,6 +396,7 @@ fun requestRowSize(): Int {
         }
     } while (!regexRow.matches(fila) || fila.toInt() > maxRowSize || fila.toInt() < minRowSize)
     return fila.toInt()
+
 }
 
 

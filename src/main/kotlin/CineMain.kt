@@ -19,7 +19,7 @@ fun main() {
     //Función que cancela la reserva de un sitio que se elija.
     val toBeCancelledSeat = cancelReservation(reservation, seatsMatrix, column, row)
     processCancellation(toBeCancelledSeat, seatsMatrix)
-d
+
 }
 
 fun processCancellation(toBeCancelledSeat: String, seatsMatrix: Array<Array<Butaca?>>) {

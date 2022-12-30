@@ -1,8 +1,11 @@
-@file:Suppress("UNUSED_EXPRESSION")
 
+
+import enums.ESTADOS.LIBRE
 import enums.ESTADOS.RESERVADO
 import models.Butaca
 
+val FREE_SEAT = Butaca(estado = LIBRE)
+val RESERVED_SEAT = Butaca(estado = RESERVADO)
 
 var totalCash: Double = 0.0
 fun main() {
@@ -10,9 +13,78 @@ fun main() {
     val column = requestColumnSize()
     val seatsMatrix = Array(row) { Array<Butaca?>(column) { null } }
     placeSeats(seatsMatrix)
+    //Función que reserva sitios
     val reservation = reverseSeat(seatsMatrix, column, row)
     processReservation(reservation, seatsMatrix)
+    //Función que cancela la reserva de un sitio que se elija.
+    val toBeCancelledSeat = cancelReservation(reservation, seatsMatrix, column, row)
+    processCancellation(toBeCancelledSeat, seatsMatrix)
+d
 }
+
+fun processCancellation(toBeCancelledSeat: String, seatsMatrix: Array<Array<Butaca?>>) {
+    val processedCancellation = toBeCancelledSeat.split(":").toTypedArray()
+    val selectedRow = processedCancellation[0]
+    val selectedColumn = processedCancellation[1]
+    val processedRow = rowLetterToNumber(selectedRow)
+
+
+    changeSeatStatusToFree(seatsMatrix, selectedColumn, processedRow)
+    printSeats(seatsMatrix)
+}
+
+fun changeSeatStatusToFree(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
+
+    seatsMatrix[processedRow][selectedColumn.toInt()-1] = FREE_SEAT
+    return seatsMatrix
+}
+
+fun cancelReservation(reservation: String, seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): String {
+
+    var toBeCancelledSeat = ""
+    val regex = """[A-Z][:][0-9]+""".toRegex()
+
+    println("Introduce el asiento que has reservado, para que podamos cancelar la reserva por usted: ")
+    do {
+
+        do {
+            toBeCancelledSeat = readln()
+            if (!regex.matches(toBeCancelledSeat.uppercase())) {
+                println("Debes el introducir la LETRA de la fila y el NÚMERO de la columna. Ejemplo: A:1 ")
+            }
+            if (regex.matches(toBeCancelledSeat.uppercase())) {
+                if (!doesColumnExist(toBeCancelledSeat, column)){
+                    println("La columna que has elegido no existe, elige otro asiento.")
+                }
+            }
+            if (regex.matches(toBeCancelledSeat.uppercase())) {
+                if (!doesRowExist(toBeCancelledSeat, row)){
+                    println("La fila que has elegido no existe, elige otro asiento.")
+                }
+            }
+
+        } while (!regex.matches(toBeCancelledSeat.uppercase()) || !doesColumnExist(toBeCancelledSeat, column))
+
+        // Desde aquí hacia arriba, nos aseguramos de que el asiento que el usuario ha elegido está escrito de la manera que queremos y que está dentro de los límites de la matriz de asientos.
+        if (!isSeatReserverd(toBeCancelledSeat, seatsMatrix)){
+            println("El asiento que has elegido, no ha sido reservado anteriormente, elige otro: ")
+        }
+
+    }while (!isSeatReserverd(toBeCancelledSeat, seatsMatrix))
+    println("Has cancelado la reserva correctamente")
+    totalCash -= 5.25
+    return toBeCancelledSeat
+}
+
+fun isSeatReserverd(toBeCancelledSeat: String, seatsMatrix: Array<Array<Butaca?>>):Boolean {
+    val aux = toBeCancelledSeat.split(":").toTypedArray()
+    val auxRow = aux[0]
+    val processedRow = rowLetterToNumber(auxRow)
+    val auxColumn = aux[1]
+    return seatsMatrix[processedRow][auxColumn.toInt()-1] == RESERVED_SEAT
+
+}
+
 
 fun processReservation(reservation: String, seatsMatrix: Array<Array<Butaca?>>) {
     val processedReservation = reservation.split(":").toTypedArray()
@@ -26,8 +98,8 @@ fun processReservation(reservation: String, seatsMatrix: Array<Array<Butaca?>>) 
 }
 
 fun changeSeatStatusToReserved(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
-    val reservedSeat = Butaca(estado = RESERVADO)
-    seatsMatrix[processedRow][selectedColumn.toInt() - 1] = reservedSeat
+
+    seatsMatrix[processedRow][selectedColumn.toInt() - 1] = RESERVED_SEAT
     return seatsMatrix
 }
 

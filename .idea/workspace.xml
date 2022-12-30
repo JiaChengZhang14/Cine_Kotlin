@@ -7,7 +7,6 @@
     <list default="true" id="d07387ac-cebf-436d-899d-211204fd4cb8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/CineMain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/CineMain.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/models/Butaca.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/models/Butaca.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,19 @@
       <workItem from="1671456843436" duration="15000" />
       <workItem from="1671521651350" duration="3078000" />
       <workItem from="1671524771438" duration="871000" />
-      <workItem from="1671525675643" duration="5512000" />
+      <workItem from="1671525675643" duration="7396000" />
+      <workItem from="1671539954388" duration="666000" />
+      <workItem from="1671541945368" duration="767000" />
+      <workItem from="1671568319515" duration="254000" />
+      <workItem from="1672137596935" duration="157000" />
+      <workItem from="1672146409874" duration="21000" />
+      <workItem from="1672155685948" duration="96000" />
+      <workItem from="1672156645256" duration="225000" />
+      <workItem from="1672179071504" duration="418000" />
+      <workItem from="1672244323019" duration="722000" />
+      <workItem from="1672325325383" duration="918000" />
+      <workItem from="1672346374164" duration="7780000" />
+      <workItem from="1672403410633" duration="654000" />
     </task>
     <servers />
   </component>

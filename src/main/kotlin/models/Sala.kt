@@ -1,3 +1,5 @@
 package models
 
-data class Sala(val nombre: String)
+data class Sala(val nombre: String){
+
+}

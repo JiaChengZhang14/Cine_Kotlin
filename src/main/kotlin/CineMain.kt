@@ -1,24 +1,186 @@
 
 
-import enums.ESTADOS.LIBRE
-import enums.ESTADOS.RESERVADO
+import enums.ESTADOS.*
 import models.Butaca
+import models.Pelicula
+import models.Sala
 
 val FREE_SEAT = Butaca(estado = LIBRE)
 val RESERVED_SEAT = Butaca(estado = RESERVADO)
+val SOLD_SEAT = Butaca(estado = OCUPADO)
+
 
 var totalCash: Double = 0.0
+var soldSeatsCount = 0
+var reservedSeatsCount = 0
+
+var exit = false
+
 fun main() {
+
+    //pedimos los valores del tamaño de la matriz de asientos y el nombre de la sala con diferentes funciones simples.
     val row = requestRowSize()
     val column = requestColumnSize()
+    val roomName = requestRoomName()
+
+    //coloco los asientos con los valores que se han pedido por consola antes.
     val seatsMatrix = Array(row) { Array<Butaca?>(column) { null } }
     placeSeats(seatsMatrix)
-    //Función que reserva sitios
-    val reservation = reverseSeat(seatsMatrix, column, row)
-    processReservation(reservation, seatsMatrix)
-    //Función que cancela la reserva de un sitio que se elija.
-    val toBeCancelledSeat = cancelReservation(reservation, seatsMatrix, column, row)
-    processCancellation(toBeCancelledSeat, seatsMatrix)
+
+    do {
+        when(selectOption()){
+            //Función que reserva sitios
+            1 -> processReservation(reverseSeat(seatsMatrix, column, row) ,seatsMatrix)
+            //Función que formaliza la reserva
+            2 -> processFormalization(formalizeReservation(seatsMatrix, column, row), seatsMatrix)
+            //Función que cancela la reserva de un sitio que se elija.
+            3 -> processCancellation(cancelReservation(seatsMatrix, column, row), seatsMatrix)
+            //Función con la que se compran los asientos.
+            4 -> processPucharse(buySeat(seatsMatrix, row, column), seatsMatrix)
+            5 -> generateReport(roomName)
+            6 -> exit = true
+        }
+    }while(!exit)
+
+}
+
+fun generateReport(roomName: String) {
+    println("ESTE ES EL INFORME DEL CINE")
+    println(" - La película reproducida es ${Pelicula()}")
+    println(" - Está siendo reproducida en la sala ${Sala(nombre = roomName)}")
+    println(" - El dinero total recolectado es de $totalCash €")
+    println(" - En este momento hay un total de $reservedSeatsCount asientos reservados y un total de $soldSeatsCount asientos vendidos")
+
+
+}
+
+fun selectOption(): Int {
+
+
+    println("***¡¡BIENVENIDO AL CINE!!***")
+    println("Seleccione la opción que necesite")
+    println()
+    println("1 -> RESERVAR ASIENTO")
+    println("2 -> FORMALIZAR RESERVA (RESERVA REQUERIDA)")
+    println("3 -> CANCELAR RESERVA (RESERVA REQUERIDA)")
+    println("4 -> COMPRAR ASIENTO")
+    println("5 -> GENERAR INFORME DEL CINE")
+    println("6 -> SALIR")
+    do {
+        print("Opción seleccionada: ")
+        val option = readln()
+        if (option.toInt() > 5 || option.toInt() < 1) {
+            println("Opción no valida")
+        } else {
+            return option.toInt()
+        }
+    } while (option.toInt() > 5 || option.toInt() < 1)
+    return 0
+}
+
+fun processPucharse(soldSeat: String, seatsMatrix: Array<Array<Butaca?>>) {
+
+    val pucharsedSeat = soldSeat.split(":").toTypedArray()
+    val rowLetter = pucharsedSeat[0]
+    val processedRow = rowLetterToNumber(rowLetter)
+    val selectedColumn = pucharsedSeat[1]
+    changeSeatStatusToOccupied(seatsMatrix, selectedColumn, processedRow)
+}
+
+fun buySeat(seatsMatrix: Array<Array<Butaca?>>, row: Int, column: Int): String {
+    println()
+    var soldSeat = ""
+    val regex = """[A-Z][:][0-9]+""".toRegex()
+
+    println("Hola! Bienvenido al cine! Estos son los asisntos disponibles (Los que aparecen con una L) ")
+    printSeats(seatsMatrix)
+    do {
+
+        do {
+            soldSeat = readln()
+            if (!regex.matches(soldSeat.uppercase())) {
+                println("Debes el introducir la LETRA de la fila y el NÚMERO de la columna. Ejemplo: A:1 ")
+            }
+            if (regex.matches(soldSeat.uppercase())) {
+                if (!doesColumnExist(soldSeat, column)){
+                    println("La columna que has elegido no existe, elige otro asiento.")
+                }
+            }
+            if (regex.matches(soldSeat.uppercase())) {
+                if (!doesRowExist(soldSeat, row)){
+                    println("La fila que has elegido no existe, elige otro asiento.")
+                }
+            }
+
+        } while (!regex.matches(soldSeat.uppercase()) || !doesColumnExist(soldSeat, column))
+
+
+        if (isSeatReserverd(soldSeat, seatsMatrix)){
+            println("El asiento que has elegido, ha sido reservado anteriormente, elige otro: ")
+        }
+
+    }while (isSeatReserverd(soldSeat, seatsMatrix))
+    println("El asiento ha sido comprado correctamente")
+    println("Se te ha hecho el cobre de 5.25€ automáticamente.")
+    totalCash += 5.25
+    soldSeatsCount++
+    return soldSeat
+}
+
+fun processFormalization(formalizedReservation: String, seatsMatrix: Array<Array<Butaca?>>) {
+    val processedFormalization = formalizedReservation.split(":").toTypedArray()
+    val selectedRow = processedFormalization[0]
+    val selectedColumn = processedFormalization[1]
+    val processedRow = rowLetterToNumber(selectedRow)
+
+
+    changeSeatStatusToOccupied(seatsMatrix, selectedColumn, processedRow)
+    printSeats(seatsMatrix)
+}
+
+fun changeSeatStatusToOccupied(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
+    seatsMatrix[processedRow][selectedColumn.toInt()-1] = SOLD_SEAT
+    return seatsMatrix
+}
+
+
+fun formalizeReservation(seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): String {
+    println()
+    var toBeFormalizedReservation = ""
+    val regex = """[A-Z][:][0-9]+""".toRegex()
+
+    println("Introduce el asiento que has reservado, para que podamos formalizar la reserva por usted y finalizar la compra de esta: ")
+    do {
+
+        do {
+            toBeFormalizedReservation = readln()
+            if (!regex.matches(toBeFormalizedReservation.uppercase())) {
+                println("Debes el introducir la LETRA de la fila y el NÚMERO de la columna. Ejemplo: A:1 ")
+            }
+            if (regex.matches(toBeFormalizedReservation.uppercase())) {
+                if (!doesColumnExist(toBeFormalizedReservation, column)){
+                    println("La columna que has elegido no existe, elige otro asiento.")
+                }
+            }
+            if (regex.matches(toBeFormalizedReservation.uppercase())) {
+                if (!doesRowExist(toBeFormalizedReservation, row)){
+                    println("La fila que has elegido no existe, elige otro asiento.")
+                }
+            }
+
+        } while (!regex.matches(toBeFormalizedReservation.uppercase()) || !doesColumnExist(toBeFormalizedReservation, column))
+
+        // Desde aquí hacia arriba, nos aseguramos de que el asiento que el usuario ha elegido está escrito de la manera que queremos y que está dentro de los límites de la matriz de asientos.
+        if (!isSeatReserverd(toBeFormalizedReservation, seatsMatrix)){
+            println("El asiento que has elegido, no ha sido reservado anteriormente, elige otro: ")
+        }
+
+    }while (!isSeatReserverd(toBeFormalizedReservation, seatsMatrix))
+    println("Has formalizado la reserva correctamente! Ya se te ha hecho el cobro de los 4€ restantes. Muchas gracias! ")
+    totalCash += 4
+    reservedSeatsCount--
+    soldSeatsCount++
+    return toBeFormalizedReservation
 
 }
 
@@ -39,8 +201,8 @@ fun changeSeatStatusToFree(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: S
     return seatsMatrix
 }
 
-fun cancelReservation(reservation: String, seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): String {
-
+fun cancelReservation(seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): String {
+    println()
     var toBeCancelledSeat = ""
     val regex = """[A-Z][:][0-9]+""".toRegex()
 
@@ -72,7 +234,9 @@ fun cancelReservation(reservation: String, seatsMatrix: Array<Array<Butaca?>>, c
 
     }while (!isSeatReserverd(toBeCancelledSeat, seatsMatrix))
     println("Has cancelado la reserva correctamente")
-    totalCash -= 5.25
+    totalCash -= 1.25
+    println("Se te ha devuelto 1.25€")
+    reservedSeatsCount--
     return toBeCancelledSeat
 }
 
@@ -136,6 +300,7 @@ private fun rowLetterToNumber(selectedRow: String): Int {
 }
 
 fun reverseSeat(seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): String {
+    println()
     var reservedSeat = ""
     val regex = """[A-Z][:][0-9]+""".toRegex()
     printSeats(seatsMatrix)
@@ -159,8 +324,10 @@ fun reverseSeat(seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): Stri
         }
 
     } while (!regex.matches(reservedSeat.uppercase()) || !doesColumnExist(reservedSeat, column))
-    totalCash += 5.25
-    println("La entrada son 5,25€, ya se te ha hecho el cobro automáticamente")
+    totalCash += 1.25
+    reservedSeatsCount++
+    println("El precio de la reserva es de 1.25€, cuando formalice la reserva se le cobrarán 4 euros para completar el precio de la entrada que es de 5.25")
+    println("Se te ha cobrado $totalCash")
     return reservedSeat
 }
 
@@ -191,7 +358,12 @@ fun printSeats(seatsMatrix: Array<Array<Butaca?>>) {
     }
 
 }
-
+fun requestRoomName(): String {
+    println("Introduce el nombre de la sala de cine:")
+    var roomName = ""
+    roomName = readln()
+    return roomName
+}
 
 fun requestColumnSize(): Int {
     val regexColumn = """\d+""".toRegex()

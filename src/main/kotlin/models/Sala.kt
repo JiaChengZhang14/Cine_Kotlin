@@ -19,12 +19,9 @@ data class Sala(val nombre: String){
         println(" - Está siendo reproducida en la sala ${Sala(nombre = roomName)}")
         println(" - El dinero total recolectado es de $totalCash €")
         println(" - En este momento hay un total de $reservedSeatsCount asientos reservados y un total de $soldSeatsCount asientos vendidos")
-
-
     }
 
     fun selectOption(): Int {
-
 
         println("***¡¡BIENVENIDO AL CINE!!***")
         println("Seleccione la opción que necesite")
@@ -61,7 +58,7 @@ data class Sala(val nombre: String){
         var soldSeat = ""
         val regex = """[A-Z][:][0-9]+""".toRegex()
 
-        println("Hola! Bienvenido al cine! Estos son los asisntos disponibles (Los que aparecen con una L) ")
+        println("Hola! Bienvenido al cine! Estos son los asientos disponibles (Los que aparecen con una L) ")
         printSeats(seatsMatrix)
         do {
 

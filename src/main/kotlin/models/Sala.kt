@@ -103,9 +103,9 @@ data class Sala(val nombre: String){
         printSeats(seatsMatrix)
     }
 
-    fun changeSeatStatusToOccupied(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
+    fun changeSeatStatusToOccupied(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int){
         seatsMatrix[processedRow][selectedColumn.toInt()-1] = SOLD_SEAT
-        return seatsMatrix
+
     }
 
 
@@ -160,7 +160,7 @@ data class Sala(val nombre: String){
         printSeats(seatsMatrix)
     }
 
-    private fun changeSeatStatusToFree(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
+    fun changeSeatStatusToFree(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
 
         seatsMatrix[processedRow][selectedColumn.toInt()-1] = FREE_SEAT
         return seatsMatrix

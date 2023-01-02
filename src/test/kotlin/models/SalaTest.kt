@@ -23,29 +23,32 @@ internal class SalaTest {
 
     @Test
     fun processPucharseTest() {
-
+        //ESTA FUNCIÓN NO SE TESTEARLA, YA QUE ES UNA FUNCIÓN INTERMEDIARA QUE LLAMA A OTRA FUNCIÓN.
     }
 
     @Test
     fun processFormalizationTest() {
+        //ESTA FUNCIÓN NO SE TESTEARLA, YA QUE ES UNA FUNCIÓN INTERMEDIARA QUE LLAMA A OTRA FUNCIÓN.
     }
 
     @Test
     fun changeSeatStatusToOccupiedTest() {
         // Pongo la casilla B:1 en libre y la cambio a ocupada con la función para testear su funcionamiento.
         testMatrix[1][0] = FREE_SEAT
+        assertEquals(testMatrix[1][0] == SOLD_SEAT, Sala("").changeSeatStatusToOccupied(testMatrix, "1", 1))
 
-        assertAll(
-            {assertEquals(testMatrix[1][0] == SOLD_SEAT,  Sala("").changeSeatStatusToOccupied(testMatrix, "1", 1))}
-        )
     }
 
     @Test
     fun processCancellationTest() {
+        //ESTA FUNCIÓN NO SE TESTEARLA, YA QUE ES UNA FUNCIÓN INTERMEDIARA QUE LLAMA A OTRA FUNCIÓN.
     }
 
     @Test
     fun changeSeatStatusToFreeTest() {
+
+        testMatrix[1][0] = SOLD_SEAT
+        assertEquals(testMatrix[1][0] == FREE_SEAT, Sala("").changeSeatStatusToFree(testMatrix, "1", 1))
     }
 
     @Test
@@ -62,11 +65,13 @@ internal class SalaTest {
 
     @Test
     fun processReservationTest() {
+        //ESTA FUNCIÓN NO SE TESTEARLA, YA QUE ES UNA FUNCIÓN INTERMEDIARA QUE LLAMA A OTRA FUNCIÓN.
     }
 
     @Test
     fun changeSeatStatusToReservedTest() {
         testMatrix[1][0] = FREE_SEAT
+        assertEquals(testMatrix[1][0] == FREE_SEAT, Sala("").changeSeatStatusToFree(testMatrix, "1", 1))
     }
 
     @Test

@@ -36,7 +36,7 @@ internal class SalaTest {
         // Pongo la casilla B:1 en libre y la cambio a ocupada con la función para testear su funcionamiento.
         testMatrix[1][0] = FREE_SEAT
         assertEquals(testMatrix[1][0] == SOLD_SEAT, Sala("").changeSeatStatusToOccupied(testMatrix, "1", 1))
-
+//ESTO NO FUNCIONA
     }
 
     @Test
@@ -46,7 +46,7 @@ internal class SalaTest {
 
     @Test
     fun changeSeatStatusToFreeTest() {
-
+//ESTO NO FUNCIONA
         testMatrix[1][0] = SOLD_SEAT
         assertEquals(testMatrix[1][0] == FREE_SEAT, Sala("").changeSeatStatusToFree(testMatrix, "1", 1))
     }
@@ -70,6 +70,7 @@ internal class SalaTest {
 
     @Test
     fun changeSeatStatusToReservedTest() {
+        //ESTO NO FUNCIONA
         testMatrix[1][0] = FREE_SEAT
         assertEquals(testMatrix[1][0] == FREE_SEAT, Sala("").changeSeatStatusToFree(testMatrix, "1", 1))
     }

@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d07387ac-cebf-436d-899d-211204fd4cb8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/models/Sala.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/models/Sala.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/models/SalaTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/models/SalaTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,6 +215,7 @@
       <workItem from="1672438518410" duration="1684000" />
       <workItem from="1672575852252" duration="9070000" />
       <workItem from="1672673428945" duration="5699000" />
+      <workItem from="1672693935460" duration="410000" />
     </task>
     <servers />
   </component>

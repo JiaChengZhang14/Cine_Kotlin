@@ -45,7 +45,6 @@ data class Sala(val nombre: String){
     }
 
     fun processPucharse(soldSeat: String, seatsMatrix: Array<Array<Butaca?>>) {
-
         val pucharsedSeat = soldSeat.split(":").toTypedArray()
         val rowLetter = pucharsedSeat[0]
         val processedRow = rowLetterToNumber(rowLetter)
@@ -81,11 +80,11 @@ data class Sala(val nombre: String){
             } while (!regex.matches(soldSeat.uppercase()) || !doesColumnExist(soldSeat, column))
 
 
-            if (isSeatReserverd(soldSeat, seatsMatrix)){
+            if (isSeatReserved(soldSeat, seatsMatrix)){
                 println("El asiento que has elegido, ha sido reservado anteriormente, elige otro: ")
             }
 
-        }while (isSeatReserverd(soldSeat, seatsMatrix))
+        }while (isSeatReserved(soldSeat, seatsMatrix))
         println("El asiento ha sido comprado correctamente")
         println("Se te ha hecho el cobre de 5.25€ automáticamente.")
         totalCash += 5.25
@@ -137,11 +136,11 @@ data class Sala(val nombre: String){
             } while (!regex.matches(toBeFormalizedReservation.uppercase()) || !doesColumnExist(toBeFormalizedReservation, column))
 
             // Desde aquí hacia arriba, nos aseguramos de que el asiento que el usuario ha elegido está escrito de la manera que queremos y que está dentro de los límites de la matriz de asientos.
-            if (!isSeatReserverd(toBeFormalizedReservation, seatsMatrix)){
+            if (!isSeatReserved(toBeFormalizedReservation, seatsMatrix)){
                 println("El asiento que has elegido, no ha sido reservado anteriormente, elige otro: ")
             }
 
-        }while (!isSeatReserverd(toBeFormalizedReservation, seatsMatrix))
+        }while (!isSeatReserved(toBeFormalizedReservation, seatsMatrix))
         println("Has formalizado la reserva correctamente! Ya se te ha hecho el cobro de los 4€ restantes. Muchas gracias! ")
         totalCash += 4
         reservedSeatsCount--
@@ -161,7 +160,7 @@ data class Sala(val nombre: String){
         printSeats(seatsMatrix)
     }
 
-    fun changeSeatStatusToFree(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
+    private fun changeSeatStatusToFree(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
 
         seatsMatrix[processedRow][selectedColumn.toInt()-1] = FREE_SEAT
         return seatsMatrix
@@ -194,11 +193,11 @@ data class Sala(val nombre: String){
             } while (!regex.matches(toBeCancelledSeat.uppercase()) || !doesColumnExist(toBeCancelledSeat, column))
 
             // Desde aquí hacia arriba, nos aseguramos de que el asiento que el usuario ha elegido está escrito de la manera que queremos y que está dentro de los límites de la matriz de asientos.
-            if (!isSeatReserverd(toBeCancelledSeat, seatsMatrix)){
+            if (!isSeatReserved(toBeCancelledSeat, seatsMatrix)){
                 println("El asiento que has elegido, no ha sido reservado anteriormente, elige otro: ")
             }
 
-        }while (!isSeatReserverd(toBeCancelledSeat, seatsMatrix))
+        }while (!isSeatReserved(toBeCancelledSeat, seatsMatrix))
         println("Has cancelado la reserva correctamente")
         totalCash -= 1.25
         println("Se te ha devuelto 1.25€")
@@ -206,7 +205,7 @@ data class Sala(val nombre: String){
         return toBeCancelledSeat
     }
 
-    fun isSeatReserverd(toBeCancelledSeat: String, seatsMatrix: Array<Array<Butaca?>>):Boolean {
+     fun isSeatReserved(toBeCancelledSeat: String, seatsMatrix: Array<Array<Butaca?>>):Boolean {
         val aux = toBeCancelledSeat.split(":").toTypedArray()
         val auxRow = aux[0]
         val processedRow = rowLetterToNumber(auxRow)
@@ -227,13 +226,13 @@ data class Sala(val nombre: String){
 
     }
 
-    fun changeSeatStatusToReserved(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
+    private fun changeSeatStatusToReserved(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
 
         seatsMatrix[processedRow][selectedColumn.toInt() - 1] = RESERVED_SEAT
         return seatsMatrix
     }
 
-    private fun rowLetterToNumber(selectedRow: String): Int {
+     fun rowLetterToNumber(selectedRow: String): Int {
         when (selectedRow.uppercase()) {
             "A" -> return 0
             "B" -> return 1
@@ -274,8 +273,6 @@ data class Sala(val nombre: String){
         println("Las filas se ordenan con las letras del abecedario y las columnas con números, un ejemplo de asiento seria B:4")
         println("que representaría el asiento de la segunda fila y la cuarta columna")
         println("Introduce el asiento: ")
-
-
 
         do {
             reservedSeat = readln()

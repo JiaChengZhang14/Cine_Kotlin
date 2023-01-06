@@ -7,7 +7,6 @@
     <list default="true" id="d07387ac-cebf-436d-899d-211204fd4cb8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/models/Sala.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/models/Sala.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/models/SalaTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/models/SalaTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +60,7 @@
       <recent name="models" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.SalaTest">
+  <component name="RunManager" selected="Kotlin.CineMainKt">
     <configuration name="SalaTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -131,29 +130,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="SalaTest.isSeatReservedTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;models.SalaTest.isSeatReservedTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="SalaTest.splitReservationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -177,13 +153,20 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="CineMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CineMainKt" />
+      <module name="Cine_Kotlin.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.CineMainKt" />
         <item itemvalue="Gradle.SalaTest" />
         <item itemvalue="Gradle.SalaTest.splitReservationTest" />
         <item itemvalue="Gradle.SalaTest.changeSeatStatusToOccupiedTest" />
         <item itemvalue="Gradle.SalaTest.changeSeatStatusToReservedTest" />
-        <item itemvalue="Gradle.SalaTest.isSeatReservedTest" />
       </list>
     </recent_temporary>
   </component>
@@ -222,7 +205,7 @@
       <workItem from="1672842498372" duration="1627000" />
       <workItem from="1672846383430" duration="33000" />
       <workItem from="1672936517165" duration="1587000" />
-      <workItem from="1673023442583" duration="6815000" />
+      <workItem from="1673023442583" duration="7743000" />
     </task>
     <servers />
   </component>

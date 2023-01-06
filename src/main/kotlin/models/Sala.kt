@@ -67,6 +67,7 @@ data class Sala(val nombre: String){
         val processedRow = rowLetterToNumber(rowLetter)
         val selectedColumn = pucharsedSeat[1]
         changeSeatStatusToOccupied(seatsMatrix, selectedColumn, processedRow)
+        printSeats(seatsMatrix)
     }
 
 
@@ -84,10 +85,10 @@ data class Sala(val nombre: String){
         var soldSeat = ""
         val regex = """[A-Z][:][0-9]+""".toRegex()
 
-        println("Hola! Bienvenido al cine! Estos son los asientos disponibles (Los que aparecen con una L) ")
+        println("Hola! Bienvenido al cine! Estos son los asientos disponibles (Los que aparecen con una 💺) ")
         printSeats(seatsMatrix)
         do {
-
+            println("Introduce el asiento que quieres comprar: ")
             do {
                 soldSeat = readln()
                 if (!regex.matches(soldSeat.uppercase())) {

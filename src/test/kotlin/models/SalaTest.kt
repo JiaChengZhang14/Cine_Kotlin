@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 
+
 internal class SalaTest {
 
     private val row = 15
@@ -21,34 +22,21 @@ internal class SalaTest {
         }
     }
 
-    @Test
-    fun processPucharseTest() {
-        //ESTA FUNCIÓN NO SE TESTEARLA, YA QUE ES UNA FUNCIÓN INTERMEDIARA QUE LLAMA A OTRA FUNCIÓN.
-    }
-
-    @Test
-    fun processFormalizationTest() {
-        //ESTA FUNCIÓN NO SE TESTEARLA, YA QUE ES UNA FUNCIÓN INTERMEDIARA QUE LLAMA A OTRA FUNCIÓN.
-    }
 
     @Test
     fun changeSeatStatusToOccupiedTest() {
         // Pongo la casilla B:1 en libre y la cambio a ocupada con la función para testear su funcionamiento.
         testMatrix[1][0] = FREE_SEAT
-        assertEquals(testMatrix[1][0] == SOLD_SEAT, Sala("").changeSeatStatusToOccupied(testMatrix, "1", 1))
-//ESTO NO FUNCIONA
+        assertEquals(SOLD_SEAT, Sala("").changeSeatStatusToOccupied(testMatrix, "1", 1))
+
     }
 
-    @Test
-    fun processCancellationTest() {
-        //ESTA FUNCIÓN NO SE TESTEARLA, YA QUE ES UNA FUNCIÓN INTERMEDIARA QUE LLAMA A OTRA FUNCIÓN.
-    }
 
     @Test
     fun changeSeatStatusToFreeTest() {
 //ESTO NO FUNCIONA
         testMatrix[1][0] = SOLD_SEAT
-        assertEquals(testMatrix[1][0] == FREE_SEAT, Sala("").changeSeatStatusToFree(testMatrix, "1", 1))
+        assertEquals(FREE_SEAT, Sala("").changeSeatStatusToFree(testMatrix, "1", 1))
     }
 
     @Test
@@ -63,16 +51,13 @@ internal class SalaTest {
         )
     }
 
-    @Test
-    fun processReservationTest() {
-        //ESTA FUNCIÓN NO SE TESTEARLA, YA QUE ES UNA FUNCIÓN INTERMEDIARA QUE LLAMA A OTRA FUNCIÓN.
-    }
+
 
     @Test
     fun changeSeatStatusToReservedTest() {
-        //ESTO NO FUNCIONA
+
         testMatrix[1][0] = FREE_SEAT
-        assertEquals(testMatrix[1][0] == FREE_SEAT, Sala("").changeSeatStatusToFree(testMatrix, "1", 1))
+        assertEquals(RESERVED_SEAT, Sala("").changeSeatStatusToReserved(testMatrix, "1", 1))
     }
 
     @Test
@@ -98,7 +83,6 @@ internal class SalaTest {
     }
 
     @Test
-
     fun rowLetterToNumberTest() {
         val entradaValida1 = "A"
         val entradaValida2 = "B"

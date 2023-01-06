@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d07387ac-cebf-436d-899d-211204fd4cb8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/models/Sala.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/models/Sala.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/models/SalaTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/models/SalaTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +61,30 @@
       <recent name="models" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.SalaTest.changeSeatStatusToOccupiedTest">
+  <component name="RunManager" selected="Gradle.SalaTest">
+    <configuration name="SalaTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;models.SalaTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="SalaTest.changeSeatStatusToOccupiedTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -84,7 +108,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="SalaTest.doesColumnExistTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SalaTest.changeSeatStatusToReservedTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -97,30 +121,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;models.SalaTest.doesColumnExistTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="SalaTest.doesRowExistTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;models.SalaTest.doesRowExistTest&quot;" />
+            <option value="&quot;models.SalaTest.changeSeatStatusToReservedTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -153,7 +154,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="SalaTest.rowLetterToNumberTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SalaTest.splitReservationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -166,7 +167,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;models.SalaTest.rowLetterToNumberTest&quot;" />
+            <option value="&quot;models.SalaTest.splitReservationTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -178,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.SalaTest" />
+        <item itemvalue="Gradle.SalaTest.splitReservationTest" />
         <item itemvalue="Gradle.SalaTest.changeSeatStatusToOccupiedTest" />
+        <item itemvalue="Gradle.SalaTest.changeSeatStatusToReservedTest" />
         <item itemvalue="Gradle.SalaTest.isSeatReservedTest" />
-        <item itemvalue="Gradle.SalaTest.doesColumnExistTest" />
-        <item itemvalue="Gradle.SalaTest.doesRowExistTest" />
-        <item itemvalue="Gradle.SalaTest.rowLetterToNumberTest" />
       </list>
     </recent_temporary>
   </component>
@@ -220,7 +221,8 @@
       <workItem from="1672755265130" duration="4230000" />
       <workItem from="1672842498372" duration="1627000" />
       <workItem from="1672846383430" duration="33000" />
-      <workItem from="1672936517165" duration="1465000" />
+      <workItem from="1672936517165" duration="1587000" />
+      <workItem from="1673023442583" duration="6815000" />
     </task>
     <servers />
   </component>

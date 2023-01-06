@@ -13,6 +13,11 @@ var soldSeatsCount = 0
 var reservedSeatsCount = 0
 
 data class Sala(val nombre: String){
+    /**
+     * @author JiaCheng Zhang
+     * @param roomName Es el nombre de la sala de cine, se pide por consola al usuario al iniciar el programa
+     * Es una función que imprime por pantalla un informe de la situación actual de cine
+     */
     fun generateReport(roomName: String) {
         println("ESTE ES EL INFORME DEL CINE")
         println(" - La película reproducida es ${Pelicula()}")
@@ -21,6 +26,12 @@ data class Sala(val nombre: String){
         println(" - En este momento hay un total de $reservedSeatsCount asientos reservados y un total de $soldSeatsCount asientos vendidos")
     }
 
+
+    /**
+     * @author JiaCheng Zhang
+     * @return El return por defecto de esta función es que devuelva 0, pero nunca se llega hasta ese punto, ya que hay early returns dentro de un bucle y no se puede salir de ese bucle.
+     * Es una Función que filtra las entradas por teclado e imprime un menú.
+     */
     fun selectOption(): Int {
 
         println("***¡¡BIENVENIDO AL CINE!!***")
@@ -44,6 +55,12 @@ data class Sala(val nombre: String){
         return 0
     }
 
+    /**
+     * @param soldSeat Es el asiento que ha elegido el usuario para comprarlo y que ya ha sido filtrada anteriormente para que no contengan errores
+     * @param seatsMatrix Es la matriz de asientos
+     * @author JiaCheng Zhang
+     * Es una función intermediaria que llama a otras funciones para procesar la compra
+     */
     fun processPucharse(soldSeat: String, seatsMatrix: Array<Array<Butaca?>>) {
         val pucharsedSeat = soldSeat.split(":").toTypedArray()
         val rowLetter = pucharsedSeat[0]
@@ -52,6 +69,16 @@ data class Sala(val nombre: String){
         changeSeatStatusToOccupied(seatsMatrix, selectedColumn, processedRow)
     }
 
+
+    /**
+     * @author JiaCheng Zhang
+     * @param seatsMatrix Es la matriz de asientos
+     * @param row Es el número de filas que tiene la matriz de asientos.
+     * @param column Es el número de columnas que tiene la matriz de asientos.
+     * Esta función pide al usuario que introduzca por consola el asiento que quiere comprar.
+     * Hay un bucle del que no se puede salir hasta que el acento que introduzca el usuario por teclado cumpla los requisitos establecidos.
+     * @return devuelve el asiento deseado.
+     */
     fun buySeat(seatsMatrix: Array<Array<Butaca?>>, row: Int, column: Int): String {
         println()
         var soldSeat = ""
@@ -92,6 +119,12 @@ data class Sala(val nombre: String){
         return soldSeat
     }
 
+    /**
+     * @param formalizedReservation Es el asiento que El usuario ya ha reservado con anterioridad
+     * @param seatsMatrix Es la matriz de asientos
+     * @author JiaCheng Zhang
+     * Es una función intermediaria que llama a otras funciones para procesar la formalización de la reserva del asiento
+     */
     fun processFormalization(formalizedReservation: String, seatsMatrix: Array<Array<Butaca?>>) {
         val processedFormalization = formalizedReservation.split(":").toTypedArray()
         val selectedRow = processedFormalization[0]
@@ -103,12 +136,30 @@ data class Sala(val nombre: String){
         printSeats(seatsMatrix)
     }
 
-    fun changeSeatStatusToOccupied(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int){
+    /**
+     * @author JiaCheng Zhang
+     * @param  seatsMatrix Es la matriz de asientos
+     * @param selectedColumn Es la columna que seleccionado el usuario
+     * @param processedRow Es la fila que seleccionado el usuario
+     * La función cambia el estado del asiento que se encuentra en la fila y la columna que se realiza el usuario por "OCUPADO"
+     */
+    fun changeSeatStatusToOccupied(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Butaca {
         seatsMatrix[processedRow][selectedColumn.toInt()-1] = SOLD_SEAT
+        return SOLD_SEAT
+
 
     }
 
 
+    /**
+     * @author JiaCheng Zhang
+     * @param seatsMatrix Es la matriz de asientos
+     * @param row Es el número de filas que tiene la matriz de asientos.
+     * @param column Es el número de columnas que tiene la matriz de asientos.
+     * Esta función pide al usuario que introduzca el asiento qye ha reservado anteriormente para poder formalizar la reserva.
+     * Hay un bucle del que no se puede salir hasta que el acento que introduzca el usuario por teclado cumpla los requisitos establecidos
+     * @return Devuelve el asiento deseado
+     */
     fun formalizeReservation(seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): String {
         println()
         var toBeFormalizedReservation = ""
@@ -149,6 +200,13 @@ data class Sala(val nombre: String){
 
     }
 
+
+    /**
+     * @param toBeCancelledSeat Es el asiento que El usuario ya ha reservado con anterioridad
+     * @param seatsMatrix Es la matriz de asientos
+     * @author JiaCheng Zhang
+     * Es una función intermediaria que llama a otras funciones para procesar la formalización de la reserva del asiento
+     */
     fun processCancellation(toBeCancelledSeat: String, seatsMatrix: Array<Array<Butaca?>>) {
         val processedCancellation = toBeCancelledSeat.split(":").toTypedArray()
         val selectedRow = processedCancellation[0]
@@ -160,12 +218,28 @@ data class Sala(val nombre: String){
         printSeats(seatsMatrix)
     }
 
-    fun changeSeatStatusToFree(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
+    /**
+     * @author JiaCheng Zhang
+     * @param  seatsMatrix Es la matriz de asientos
+     * @param selectedColumn Es la columna que seleccionado el usuario
+     * @param processedRow Es la fila que seleccionado el usuario
+     * La función cambia el estado del asiento que se encuentra en la fila y la columna que se realiza el usuario por "LIBRE"
+     */
+    fun changeSeatStatusToFree(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Butaca {
 
         seatsMatrix[processedRow][selectedColumn.toInt()-1] = FREE_SEAT
-        return seatsMatrix
+        return FREE_SEAT
     }
 
+    /**
+     * @author JiaCheng Zhang
+     * @param seatsMatrix Es la matriz de asientos
+     * @param row Es el número de filas que tiene la matriz de asientos.
+     * @param column Es el número de columnas que tiene la matriz de asientos.
+     * Esta función pide al usuario que introduzca el asiento qye ha reservado anteriormente para poder cancelar la reserva.
+     * Hay un bucle del que no se puede salir hasta que el acento que introduzca el usuario por teclado cumpla los requisitos establecidos.
+     * @return Devuelve el asiento elegido
+     */
     fun cancelReservation(seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): String {
         println()
         var toBeCancelledSeat = ""
@@ -205,6 +279,13 @@ data class Sala(val nombre: String){
         return toBeCancelledSeat
     }
 
+    /**
+     * @author JiaCheng Zhang
+     * @param toBeCancelledSeat Es el asiento que ha introducido el usuario por teclado
+     * @param seatsMatrix Es la matriz de asientos.
+     * La función comprueba el asiento ha sido reservado realmente
+     * @return Devuelve true si el asiento está reservado y false si no lo está
+     */
      fun isSeatReserved(toBeCancelledSeat: String, seatsMatrix: Array<Array<Butaca?>>):Boolean {
         val aux = toBeCancelledSeat.split(":").toTypedArray()
         val auxRow = aux[0]
@@ -215,6 +296,12 @@ data class Sala(val nombre: String){
     }
 
 
+    /**
+     * @param reservation Es el asiento que El usuario ya ha reservado con anterioridad
+     * @param seatsMatrix Es la matriz de asientos
+     * @author JiaCheng Zhang
+     * Es una función intermediaria que llama a otras funciones para procesar la reserva del asiento
+     */
     fun processReservation(reservation: String, seatsMatrix: Array<Array<Butaca?>>) {
         val processedReservation = reservation.split(":").toTypedArray()
         val selectedRow = processedReservation[0]
@@ -226,12 +313,26 @@ data class Sala(val nombre: String){
 
     }
 
-    private fun changeSeatStatusToReserved(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Array<Array<Butaca?>> {
+    /**
+     * @author JiaCheng Zhang
+     * @param  seatsMatrix Es la matriz de asientos
+     * @param selectedColumn Es la columna que seleccionado el usuario
+     * @param processedRow Es la fila que seleccionado el usuario
+     * La función cambia el estado del asiento que se encuentra en la fila y la columna que se realiza el usuario por "RESERVADO"
+     * @return Devuelve un asiento reservado
+     */
+    fun changeSeatStatusToReserved(seatsMatrix: Array<Array<Butaca?>>, selectedColumn: String, processedRow: Int): Butaca {
 
         seatsMatrix[processedRow][selectedColumn.toInt() - 1] = RESERVED_SEAT
-        return seatsMatrix
+        return RESERVED_SEAT
     }
 
+    /**
+     * @author JiaCheng Zhang
+     * @param selectedRow Es la fila que ha elegido el usuario (se ha exigido que sea una letra)
+     * La función cambia las letras de las filas por los números correspondientes a la matriz
+     * @return Devuelve los números correspondientes a sus letras
+     */
      fun rowLetterToNumber(selectedRow: String): Int {
         when (selectedRow.uppercase()) {
             "A" -> return 0
@@ -264,6 +365,15 @@ data class Sala(val nombre: String){
         return -1
     }
 
+    /**
+     * @author JiaCheng Zhang
+     * @param seatsMatrix Es la matriz de asientos
+     * @param row Es el número de filas que tiene la matriz de asientos.
+     * @param column Es el número de columnas que tiene la matriz de asientos.
+     * Esta función pide al usuario que introduzca un asiento para que pueda ser reservado.
+     * Hay un bucle del que no se puede salir hasta que el acento que introduzca el usuario por teclado cumpla los requisitos establecidos.
+     * @return Devuelve el asiento deseado
+     */
     fun reverseSeat(seatsMatrix: Array<Array<Butaca?>>, column: Int, row: Int): String {
         println()
         var reservedSeat = ""
@@ -298,12 +408,25 @@ data class Sala(val nombre: String){
         return reservedSeat
     }
 
+
+    /**
+     * @param reservedSeat Esa la siento que he introducido el usuario por teclado en la función anterior
+     * @param row Es la fila que entre reducido el usuario por teclado
+     * La función comprueba que la fila que ha introducido el usuario por teclado está dentro de los límites de la matriz, cuyas dimensiones han sido establecidas al principio del programa
+     * @return Devuelve true si la fila está dentro de la matriz y false si la fila está afuera
+     */
     fun doesRowExist(reservedSeat: String, row: Int): Boolean {
         val filteredRow = reservedSeat.split(":").toTypedArray()
         val rowNumber = rowLetterToNumber(filteredRow[0])
         return rowNumber <= row
     }
 
+    /**
+     * @param reservedSeat Esa la siento que he introducido el usuario por teclado en la función anterior
+     * @param column Es la columna que entre reducido el usuario por teclado
+     * La función comprueba que la columna que ha introducido el usuario por teclado está dentro de los límites de la matriz, cuyas dimensiones han sido establecidas al principio del programa
+     * @return Devuelve true si la columna existe, false si no
+     */
     fun doesColumnExist(reservedSeat: String, column: Int): Boolean {
         val filteredColumn = reservedSeat.split(":").toTypedArray()
         return filteredColumn[1].toInt() <= column
@@ -311,6 +434,11 @@ data class Sala(val nombre: String){
     }
 
 
+    /**
+     * @author JiaCheng Zhang
+     * @param seatsMatrix Es la matriz de asientos
+     * La función llena la matriz de butacas libres
+     */
     fun placeSeats(seatsMatrix: Array<Array<Butaca?>>) {
         for (i in seatsMatrix.indices) {
             for (j in seatsMatrix[i].indices) {
@@ -319,12 +447,23 @@ data class Sala(val nombre: String){
         }
     }
 
+    /**
+     * @author JiaCheng Zhang
+     * @param seatsMatrix Es la matriz de asientos
+     * La función imprime por pantalla la matriz de asientos
+     */
     fun printSeats(seatsMatrix: Array<Array<Butaca?>>) {
         for (i in seatsMatrix.indices) {
             println(seatsMatrix[i].contentToString())
         }
 
     }
+
+    /**
+     * @author JiaCheng Zhang
+     * Pide al usuario que introduzca por teclado el nombre de la sala
+     * @return devuelve el nombre
+     */
     fun requestRoomName(): String {
         println("Introduce el nombre de la sala de cine:")
         var roomName = ""
@@ -332,6 +471,11 @@ data class Sala(val nombre: String){
         return roomName
     }
 
+    /**
+     * @author JiaCheng Zhang
+     * Pide al usuario que introduzca la columna deseada
+     * @return devuelve la columna, siempre que cumpla los requisitos
+     */
     fun requestColumnSize(): Int {
         val regexColumn = """\d+""".toRegex()
         val minColumnSize = 1
@@ -346,6 +490,11 @@ data class Sala(val nombre: String){
         return column.toInt()
     }
 
+    /**
+     * @author JiaCheng Zhang
+     * Pide al usuario que introduzca la fila deseada
+     * @return devuelve la fila, siempre que cumpla los requisitos
+     */
     fun requestRowSize(): Int {
         val regexRow = """\d+""".toRegex()
         /*
